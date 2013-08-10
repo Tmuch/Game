@@ -66,8 +66,6 @@ public class Game {
 		} catch (LWJGLException e) {
 			e.printStackTrace();
 		}
-		
-		
 		run();
 	}
 	

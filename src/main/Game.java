@@ -1,5 +1,7 @@
 package main;
 
+import input.InputManager;
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -29,10 +31,10 @@ public class Game {
 	private long elapsed;
 	
 	//private World world;
-	
+	//private GamePhysics physics;
+	private InputManager input;
 	private boolean running;
 	private boolean paused;
-	//private GamePhysics physics;
 	
 
 	public static void main(String[] args) {
@@ -62,6 +64,8 @@ public class Game {
 			Keyboard.create();
 			Mouse.create();
 			Display.setTitle("Game");
+			
+			input = InputManager.getManager();
 			
 		} catch (LWJGLException e) {
 			e.printStackTrace();
@@ -141,7 +145,7 @@ public class Game {
 	
 	private void input()
 	{
-		
+		input.update();
 	}
 	
 	private void update()

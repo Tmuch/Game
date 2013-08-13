@@ -70,6 +70,8 @@ public class InputManager {
 	
 	/* For Mouse */
 	
+	/* TODO: Mouse position and movement tracking */
+	
 	public boolean getMouse(int mouseButton)
 	{
 		return Mouse.isButtonDown(mouseButton);

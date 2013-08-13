@@ -50,7 +50,7 @@ public class InputManager {
 		return Keyboard.isKeyDown(keyCode);
 	}
 	
-	public boolean getKeydown(int keyCode)
+	public boolean getKeyDown(int keyCode)
 	{
 		return downKeys.contains(keyCode);
 	}
@@ -97,6 +97,11 @@ public class InputManager {
 		if(!Mouse.isGrabbed()) return;
 		Mouse.setCursorPosition(Display.getWidth() / 2, Display.getHeight() / 2);
 		Mouse.setGrabbed(false);
+	}
+	
+	public boolean mouseIsGrabbed()
+	{
+		return Mouse.isGrabbed();
 	}
 	
 	

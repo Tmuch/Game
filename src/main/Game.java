@@ -66,6 +66,7 @@ public class Game {
 			Display.setTitle("Game");
 			
 			input = InputManager.getManager();
+			input.grabMouse();
 			
 		} catch (LWJGLException e) {
 			e.printStackTrace();
@@ -80,11 +81,11 @@ public class Game {
 		{
 			
 			if(Display.isCloseRequested()) stop();
-			if(paused)
+			/*if(paused)
 			{
 				
 			} else
-			{
+			*/{
 			
 				currTime = System.nanoTime();
 				delta += (currTime - lastTime) / (SECOND_NS / (double)UPDATES_PER_SEC);
@@ -146,6 +147,7 @@ public class Game {
 	private void input()
 	{
 		input.update();
+		
 	}
 	
 	private void update()

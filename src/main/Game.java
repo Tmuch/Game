@@ -67,9 +67,9 @@ public class Game {
 		
 		fbSpeed = 0.15f;
 		lrSpeed = 0.1f;
-		generalMoveSpeed = 2;
+		generalMoveSpeed = 1.2f;
 		
-		lookSpeed = 0.02f;
+		lookSpeed = 0.04f;
 	}
 	
 	private void start()
@@ -198,6 +198,16 @@ public class Game {
 		if(input.getKey(Keyboard.KEY_RIGHT))
 		{
 			cam.rotateY(lookSpeed * generalMoveSpeed);
+		}
+		
+		if(input.getKey(Keyboard.KEY_LSHIFT))
+		{
+			cam.moveDown(0.12f);
+		}
+		
+		if(input.getKey(Keyboard.KEY_SPACE))
+		{
+			cam.moveUp(0.12f);
 		}
 		
 		if(input.getKey(Keyboard.KEY_ESCAPE))

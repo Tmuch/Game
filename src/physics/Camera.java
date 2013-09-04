@@ -123,6 +123,16 @@ public class Camera
 		z += amt * Math.sin(Math.toRadians(roty + 90 * dir));
 		x += amt * Math.cos(Math.toRadians(roty + 90 * dir));
 	}
+	
+	public void moveUp(float amt)
+	{
+		y -= amt;
+	}
+	
+	public void moveDown(float amt)
+	{
+		y += amt;
+	}
 
 	public void rotateY(float r)
 	{

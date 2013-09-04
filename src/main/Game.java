@@ -8,6 +8,10 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
+import static org.lwjgl.opengl.GL11.*;
+import physics.Camera;
+import physics.World;
+
 public class Game {
 	
 	private final long UPDATES_PER_SEC = 60;
@@ -30,11 +34,19 @@ public class Game {
 	private double delta;
 	private long elapsed;
 	
-	//private World world;
+	private World world;
+	public Camera cam;
 	//private GamePhysics physics;
 	private InputManager input;
 	private boolean running;
 	private boolean paused;
+	
+	
+	private float fbSpeed;
+	private float lrSpeed;
+	private float generalMoveSpeed;
+	private float lookSpeed;
+	
 	
 
 	public static void main(String[] args) {
@@ -52,6 +64,12 @@ public class Game {
 		lastTime = System.nanoTime();
 		prevTimeMillis = System.currentTimeMillis();
 		elapsed = 1;
+		
+		fbSpeed = 0.15f;
+		lrSpeed = 0.1f;
+		generalMoveSpeed = 2;
+		
+		lookSpeed = 0.02f;
 	}
 	
 	private void start()
@@ -66,8 +84,11 @@ public class Game {
 			Display.setTitle("Game");
 			
 			input = InputManager.getManager();
-			input.grabMouse();
+			//input.grabMouse();
 			
+			/* Must be here (for now) because OpenGL context must be initialized */
+			cam = new Camera(70, (float) Display.getWidth() / (float) Display.getHeight(), 0.3f, 1000);
+			world = new World();
 		} catch (LWJGLException e) {
 			e.printStackTrace();
 		}
@@ -93,14 +114,13 @@ public class Game {
 				
 				while(delta >= 1)
 				{
-					//world.update();
+					input();
+					update();
+					render();
 					updates++;
 					delta--;
 				}
 				
-				
-				input();
-				update();
 				render();
 				//frames++;
 				
@@ -139,7 +159,11 @@ public class Game {
 	
 	private void render()
 	{
-		//world.render();
+		
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glLoadIdentity();
+		cam.useView();
+		world.render();
 		Display.update();
 	}
 	
@@ -147,13 +171,67 @@ public class Game {
 	private void input()
 	{
 		input.update();
+		if(input.getKey(Keyboard.KEY_S))
+		{
+			cam.move(-fbSpeed * generalMoveSpeed, Camera.DIR_FB);
+		}
+		if(input.getKey(Keyboard.KEY_W))
+		{
+			cam.move(fbSpeed * generalMoveSpeed, Camera.DIR_FB);
+		}
+		
+		if(input.getKey(Keyboard.KEY_A))
+		{
+			cam.move(lrSpeed * generalMoveSpeed, Camera.DIR_LR);
+		}
+		
+		if(input.getKey(Keyboard.KEY_D))
+		{
+			cam.move(-lrSpeed * generalMoveSpeed, Camera.DIR_LR);
+		}
+		
+		if(input.getKey(Keyboard.KEY_LEFT))
+		{
+			cam.rotateY(-lookSpeed * generalMoveSpeed);
+		}
+		
+		if(input.getKey(Keyboard.KEY_RIGHT))
+		{
+			cam.rotateY(lookSpeed * generalMoveSpeed);
+		}
+		
+		if(input.getKey(Keyboard.KEY_ESCAPE))
+		{
+			input.grabMouse();
+		}
+		
+		if(input.getKey(Keyboard.KEY_TAB))
+		{
+			input.unGrabMouse();
+		}
+		
+		if(input.mouseXYChange())
+		{
+			cam.rotateY(input.getDX() * lookSpeed);
+			cam.rotateX(input.getDY() * lookSpeed * -1f);
+		}
 		
 	}
 	
 	private void update()
 	{
-		
+		world.update();
 	}
 	
+	
+	public void setLRSpeed(float speed) 
+	{
+		lrSpeed = speed;
+	}
+	
+	public void setFBSpeed(float speed)
+	{
+		fbSpeed = speed;
+	}
 
 }

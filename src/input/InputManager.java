@@ -89,14 +89,14 @@ public class InputManager {
 	
 	public void grabMouse()
 	{
-		if(Mouse.isGrabbed()) return;
+		if(mouseIsGrabbed()) return;
 		Mouse.setGrabbed(true);
 		deltaX = deltaY = 0;
 	}
 	
 	public void unGrabMouse()
 	{
-		if(!Mouse.isGrabbed()) return;
+		if(!mouseIsGrabbed()) return;
 		Mouse.setCursorPosition(Display.getWidth() / 2, Display.getHeight() / 2);
 		Mouse.setGrabbed(false);
 	}
@@ -104,6 +104,28 @@ public class InputManager {
 	public boolean mouseIsGrabbed()
 	{
 		return Mouse.isGrabbed();
+	}
+	
+	public boolean mouseXYChange()
+	{
+		if(!mouseIsGrabbed())
+		{
+			return false;
+		}
+		
+		this.deltaX = Mouse.getDX();
+		this.deltaY = Mouse.getDY();
+		return true;
+	}
+	
+	public int getDX()
+	{
+		return this.deltaX;
+	}
+	
+	public int getDY()
+	{
+		return this.deltaY;
 	}
 	
 	

@@ -29,6 +29,17 @@ public class Entity {
 		color3 = Color.RED;
 	}
 	
+	public Entity(float x, float y, float z, float l, float w, float h, Color c)
+	{
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.length = l;
+		this.width = w;
+		this.height = h;
+		color = color2 = color3 = c;
+	}
+	
 	public void render()
 	{
 		

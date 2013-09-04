@@ -37,7 +37,7 @@ public class World {
 	
 	private void init()
 	{
-		entities.add(new Entity());
+		entities.add(new Entity(20, 20, -10, 20, 15, 50, Color.LIGHT_GRAY));
 	}
 	
 	public void render()

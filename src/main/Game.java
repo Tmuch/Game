@@ -205,9 +205,18 @@ public class Game {
 			cam.moveDown(0.12f);
 		}
 		
+		if(input.getKey(Keyboard.KEY_RSHIFT))
+		{
+			cam.toggleCheat();
+		}
+		
 		if(input.getKey(Keyboard.KEY_SPACE))
 		{
-			cam.moveUp(0.12f);
+			if(cam.getCheat())
+			{
+				cam.jump();
+			} else
+				cam.moveUp(0.12f);
 		}
 		
 		if(input.getKey(Keyboard.KEY_ESCAPE))

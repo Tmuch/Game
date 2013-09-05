@@ -22,6 +22,8 @@ public class Camera
 	
 	private float	height;
 	
+	private boolean cheat;
+	
 	public static final float DIR_FB = 1F;
 	public static final float DIR_LR = 0f;
 
@@ -35,6 +37,7 @@ public class Camera
 		this.aspect = aspect;
 		this.nearclip = near;
 		this.farclip = far;
+		this.cheat = false;
 		initProjection();
 	}
 
@@ -135,8 +138,13 @@ public class Camera
 	
 	public void moveDown(float amt)
 	{
-		if(y + amt + height > 0) return;
-		y += amt;
+			if(y + amt + height > 0) return;
+			y += amt;
+	}
+	
+	public void jump()
+	{
+		
 	}
 
 	public void rotateY(float r)
@@ -149,6 +157,16 @@ public class Camera
 		// can only look straight up or straight down
 		if(Math.abs(rotx + r) > 90) return;
 		rotx += r;
+	}
+	
+	public void toggleCheat()
+	{
+		cheat = !cheat;
+	}
+	
+	public boolean getCheat()
+	{
+		return cheat;
 	}
 
 }

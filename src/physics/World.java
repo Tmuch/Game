@@ -38,6 +38,7 @@ public class World {
 	private void init()
 	{
 		entities.add(new Entity(20, 20, -10, 20, 15, 50, Color.LIGHT_GRAY));
+		entities.add(new Entity());
 	}
 	
 	public void render()
@@ -48,17 +49,12 @@ public class World {
 			glBegin(GL_QUADS);
 			{
 				float w = (float)width / (float)2;
-				glVertex3f(-w, -5f, w);
-				glVertex3f(-w, -5f, -w);
-				glVertex3f(w, -5f, -w);
-				glVertex3f(w, -5f, w);
+				glVertex3f(-w, 0f, w);
+				glVertex3f(-w, 0f, -w);
+				glVertex3f(w, 0f, -w);
+				glVertex3f(w, 0f, w);
 			}
 			glEnd();
-			
-			for(Entity e : entities)
-			{
-				e.render();
-			}
 			
 			//2D test
 			/*
@@ -74,6 +70,12 @@ public class World {
 			glEnd();*/
 		}
 		glPopMatrix();
+		
+		
+		for(Entity e : entities)
+		{
+			e.render();
+		}
 		
 		
 		

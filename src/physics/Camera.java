@@ -20,12 +20,16 @@ public class Camera
 	private float	nearclip;
 	private float	farclip;
 	
+	private float	height;
+	
 	public static final float DIR_FB = 1F;
 	public static final float DIR_LR = 0f;
 
 	public Camera(float fov, float aspect, float near, float far)
 	{
-		x = y = z = 0;
+		this.height = 2;
+		x = z = 0;
+		y = -height * 3;
 		rotx = roty = rotz = 0;
 		this.fov = fov;
 		this.aspect = aspect;
@@ -131,6 +135,7 @@ public class Camera
 	
 	public void moveDown(float amt)
 	{
+		if(y + amt + height > 0) return;
 		y += amt;
 	}
 
@@ -141,6 +146,8 @@ public class Camera
 	
 	public void rotateX(float r)
 	{
+		// can only look straight up or straight down
+		if(Math.abs(rotx + r) > 90) return;
 		rotx += r;
 	}
 

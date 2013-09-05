@@ -144,7 +144,11 @@ public class Camera
 	
 	public void jump()
 	{
-		
+		float initVelo;
+		float grav;
+		/*
+		 * TODO
+		 */
 	}
 
 	public void rotateY(float r)

@@ -9,7 +9,7 @@ package physics;
  */
 public class AABB {
 	
-	private Vector3f pos, size;
+	public Vector3f pos, size;
 	/*
 	 * Size:
 	 * x = width
@@ -30,18 +30,41 @@ public class AABB {
 	
 	
 	
-	
+	boolean printed = true;
 	public boolean collides(AABB b){
 		Vector3f halfSizeA = this.size.div(2f);
 		Vector3f centerA = this.pos.add(halfSizeA);
 		Vector3f halfSizeB = b.size.div(2f);
-		Vector3f centerB = this.pos.add(halfSizeB);
+		Vector3f centerB = b.pos.add(halfSizeB);
 		
-		if(Math.abs(centerA.getX() - centerB.getX()) < halfSizeA.getX() + halfSizeB.getX())
+		/* If difference between centerpoints of two AABB's is smaller than
+		 * the sum of the distances between each AABB's centerpoint and edge of its
+		 * respective box.
+		 */
+		
+		
+		if(!printed)
 		{
-			if(Math.abs(centerA.getY() - centerB.getX()) < halfSizeA.getY() + halfSizeB.getY())
+			System.out.println("a.pos: " + this.pos);
+			System.out.println("a.size: " + this.size);
+			System.out.println("b.pos: " + b.pos);
+			System.out.println("b.size: " + b.size);
+			
+			
+			System.out.println("halfSizeA: " + halfSizeA);
+			System.out.println("centerA: " + centerA);
+			System.out.println("halfSizeB: " + halfSizeB);
+			System.out.println("centerB: " + centerB);
+			
+		}
+		printed = true;
+		
+		
+		if(Math.abs(centerA.getX() - centerB.getX()) < (halfSizeA.getX() + halfSizeB.getX()))
+		{
+			if(Math.abs(centerA.getY() - centerB.getY()) < (halfSizeA.getY() + halfSizeB.getY()))
 			{
-				if(Math.abs(centerA.getZ() - centerB.getZ()) < halfSizeA.getZ() + halfSizeB.getZ())
+				if(Math.abs(centerA.getZ() - centerB.getZ()) < (halfSizeA.getZ() + halfSizeB.getZ()))
 				{
 					return true;
 				}

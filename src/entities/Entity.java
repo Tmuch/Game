@@ -24,7 +24,7 @@ public class Entity {
 	//private Vector3f pos;
 	//private float length, width, height;
 	
-	private AABB bounds;
+	public AABB bounds;
 	
 	private Color color, color2, color3;
 	
@@ -44,6 +44,16 @@ public class Entity {
 		Vector3f s = new Vector3f(w, h, l);
 		bounds = new AABB(p, s);
 		color = color2 = color3 = c;
+	}
+	
+	public Entity(float x, float y, float z, float l, float w, float h, Color c1, Color c2, Color c3)
+	{
+		Vector3f p = new Vector3f(x, y, y);
+		Vector3f s = new Vector3f(w, h, l);
+		bounds = new AABB(p, s);
+		color = c1;
+		color2 = c2;
+		color3 = c3;
 	}
 	
 	public void render()
@@ -124,6 +134,13 @@ public class Entity {
 		
 		}
 		glPopMatrix();
+		
+	}
+	
+	
+	public boolean collides(Entity e)
+	{
+		return this.bounds.collides(e.bounds);
 	}
 	
 }

@@ -238,6 +238,11 @@ public class Game {
 			cam.rotateX(input.getDY() * lookSpeed * -1f);
 		}
 		
+		if(input.getKey(Keyboard.KEY_RETURN))
+		{
+			world.test();
+		}
+		
 		
 		
 	}

@@ -19,9 +19,9 @@ public class Entity {
 	 * This bounding box will be used to detect collision.
 	 * All bounding boxes will be axis aligned.
 	 */
-	private float x, y, z;
-	private Vector3f pos;
-	private float length, width, height;
+	//private float x, y, z;
+	//private Vector3f pos;
+	//private float length, width, height;
 	
 	private AABB bounds;
 	
@@ -29,12 +29,9 @@ public class Entity {
 	
 	public Entity()
 	{
-		this.x = 0f;
-		this.y = 1f;
-		this.z = -10f;
-		this.length = 2f;
-		this.width = 2f;
-		this.height = 5f;
+		Vector3f p = new Vector3f(0f, 1f, -10f);
+		Vector3f s = new Vector3f(2f, 2f, 5f);
+		bounds = new AABB(p, s);
 		color = Color.BLUE;
 		color2 = Color.GREEN;
 		color3 = Color.RED;
@@ -42,12 +39,9 @@ public class Entity {
 	
 	public Entity(float x, float y, float z, float l, float w, float h, Color c)
 	{
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		this.length = l;
-		this.width = w;
-		this.height = h;
+		Vector3f p = new Vector3f(x, y, y);
+		Vector3f s = new Vector3f(w, h, l);
+		bounds = new AABB(p, s);
 		color = color2 = color3 = c;
 	}
 	
@@ -57,10 +51,16 @@ public class Entity {
 		glPushMatrix();
 		{
 			//glColor3f(1.0f, 0.5f, 0f);
-			glTranslatef(x, y, z);
+			glTranslatef(bounds.getX(), bounds.getY(), bounds.getZ());
 			//glRotatef(x, 1, 1.5f, 0.75f);
 			glBegin(GL_QUADS);
 			{
+				
+				float width, height, length;
+				width = bounds.getWidth();
+				height = bounds.getHeight();
+				length = bounds.getLength();
+				
 				setColor(color3);
 				// Left face
 				glVertex3f(0f, 0f, 0f);

@@ -24,6 +24,10 @@ public class Camera
 	
 	private boolean cheat;
 	
+	public AABB bounds;
+	
+	
+	
 	public static final float DIR_FB = 1F;
 	public static final float DIR_LR = 0f;
 

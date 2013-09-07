@@ -6,6 +6,7 @@ import static utils.RenderUtils.*;
 import physics.AABB;
 import physics.Color;
 import physics.Vector3f;
+import utils.RenderUtils;
 
 public class Entity {
 	
@@ -106,6 +107,21 @@ public class Entity {
 			}
 			glEnd();
 
+		}
+		glPopMatrix();
+		
+		glPushMatrix();
+		{
+			
+			glLineWidth(2.5f);
+			glBegin(GL_LINES);
+			{
+				RenderUtils.setColor(Color.WHITE);
+				glVertex3f(0f, 0f, 0f);
+				glVertex3f(bounds.getX(), bounds.getY(), bounds.getZ());
+			}
+			glEnd();
+		
 		}
 		glPopMatrix();
 	}

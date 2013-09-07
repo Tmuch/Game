@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.Display;
 
+import utils.RenderUtils;
 import entities.Entity;
 
 public class World {
@@ -45,7 +46,7 @@ public class World {
 	{
 		glPushMatrix();
 		{
-			glColor3f(1f, 1f, 1f);
+			RenderUtils.setColor(Color.DARK_GRAY);
 			glBegin(GL_QUADS);
 			{
 				float w = (float)width / (float)2;

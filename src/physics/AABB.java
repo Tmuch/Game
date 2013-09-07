@@ -27,6 +27,35 @@ public class AABB {
 		this.pos = p;
 		this.size = s;
 	}
+	
+	
+	
+	
+	public boolean collides(AABB b){
+		Vector3f halfSizeA = this.size.div(2f);
+		Vector3f centerA = this.pos.add(halfSizeA);
+		Vector3f halfSizeB = b.size.div(2f);
+		Vector3f centerB = this.pos.add(halfSizeB);
+		
+		if(Math.abs(centerA.getX() - centerB.getX()) < halfSizeA.getX() + halfSizeB.getX())
+		{
+			if(Math.abs(centerA.getY() - centerB.getX()) < halfSizeA.getY() + halfSizeB.getY())
+			{
+				if(Math.abs(centerA.getZ() - centerB.getZ()) < halfSizeA.getZ() + halfSizeB.getZ())
+				{
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	
+	
+	
+	
+	
 
 	public Vector3f getPos() {
 		return pos;

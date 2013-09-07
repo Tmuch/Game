@@ -48,13 +48,6 @@ public class Camera
 		glLoadIdentity(); //clear the projection matrix
 		gluPerspective(fov, aspect, nearclip, farclip);
 		glMatrixMode(GL_MODELVIEW);
-
-		glEnable(GL_DEPTH_TEST);
-
-		//glFrontFace(GL_CW); //clockwise
-		//glCullFace(GL_BACK);
-		//glEnable(GL_CULL_FACE);
-
 	}
 
 	public float getX()

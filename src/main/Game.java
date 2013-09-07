@@ -10,7 +10,9 @@ import org.lwjgl.opengl.DisplayMode;
 
 import static org.lwjgl.opengl.GL11.*;
 import physics.Camera;
+import physics.Vector3f;
 import physics.World;
+import utils.RenderUtils;
 
 public class Game {
 	
@@ -88,6 +90,7 @@ public class Game {
 			
 			/* Must be here (for now) because OpenGL context must be initialized */
 			cam = new Camera(70, (float) Display.getWidth() / (float) Display.getHeight(), 0.3f, 1000);
+			RenderUtils.initGraphics();
 			world = new World();
 		} catch (LWJGLException e) {
 			e.printStackTrace();
@@ -234,6 +237,8 @@ public class Game {
 			cam.rotateY(input.getDX() * lookSpeed);
 			cam.rotateX(input.getDY() * lookSpeed * -1f);
 		}
+		
+		
 		
 	}
 	

@@ -11,4 +11,12 @@ public class RenderUtils {
 		glColor3f(c.getRf(), c.getGf(), c.getBf());
 	}
 
+	
+	public static void initGraphics()
+	{
+		glEnable(GL_DEPTH_TEST);
+		glFrontFace(GL_CW); //clockwise
+		glCullFace(GL_BACK);
+		glEnable(GL_CULL_FACE);
+	}
 }

@@ -3,8 +3,9 @@ package entities;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.*;
 import static utils.RenderUtils.*;
-
+import physics.AABB;
 import physics.Color;
+import physics.Vector3f;
 
 public class Entity {
 	
@@ -12,8 +13,18 @@ public class Entity {
 	 * Position of the entity.
 	 * 	Always the most negative extremities of the object.
 	 */
+	
+	/*
+	 * The position and size variables represent the bounding box of this entity.
+	 * This bounding box will be used to detect collision.
+	 * All bounding boxes will be axis aligned.
+	 */
 	private float x, y, z;
+	private Vector3f pos;
 	private float length, width, height;
+	
+	private AABB bounds;
+	
 	private Color color, color2, color3;
 	
 	public Entity()
@@ -89,9 +100,9 @@ public class Entity {
 				setColor(color);
 				// Bottom face
 				glVertex3f(0f, 0f, length);
-				glVertex3f(0f, 0f, 0f);
-				glVertex3f(width, 0f, 0f);
 				glVertex3f(width, 0f, length);
+				glVertex3f(width, 0f, 0f);
+				glVertex3f(0f, 0f, 0f);
 			}
 			glEnd();
 

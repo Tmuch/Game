@@ -32,6 +32,9 @@ public class Vector2f {
 		return this;
 	}
 	
+	/* 
+	 * Rotation derived from imaginary number multiplication.
+	 */
 	public Vector2f rotate(float angle)
 	{
 		double rad = Math.toRadians(angle);

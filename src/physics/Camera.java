@@ -135,7 +135,7 @@ public class Camera
 	
 	public void moveDown(float amt)
 	{
-			if(y + amt + height > 0) return;
+			//if(y + amt + height > 0) return;
 			y += amt;
 	}
 	

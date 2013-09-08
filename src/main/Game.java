@@ -193,16 +193,6 @@ public class Game {
 			cam.move(-lrSpeed * generalMoveSpeed, Camera.DIR_LR);
 		}
 		
-		if(input.getKey(Keyboard.KEY_LEFT))
-		{
-			cam.rotateY(-lookSpeed * generalMoveSpeed);
-		}
-		
-		if(input.getKey(Keyboard.KEY_RIGHT))
-		{
-			cam.rotateY(lookSpeed * generalMoveSpeed);
-		}
-		
 		if(input.getKey(Keyboard.KEY_LSHIFT))
 		{
 			cam.moveDown(0.12f);

@@ -20,8 +20,8 @@ public class Game {
 	private final long SECOND_NS = 1000000000L;
 	private final long SECOND_MS = 1000L;
 	
-	private final int WIDTH = 800;
-	private final int HEIGHT = 600;
+	private final int WIDTH = 1200;
+	private final int HEIGHT = 900;
 	
 	
 	private long fps;	// frames per second

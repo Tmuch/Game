@@ -20,9 +20,6 @@ public class Entity {
 	 * This bounding box will be used to detect collision.
 	 * All bounding boxes will be axis aligned.
 	 */
-	//private float x, y, z;
-	//private Vector3f pos;
-	//private float length, width, height;
 	
 	public AABB bounds;
 	

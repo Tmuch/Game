@@ -118,7 +118,7 @@ public class Entity {
 		}
 		glPopMatrix();
 		
-		/*
+		
 		glPushMatrix();
 		{
 			
@@ -133,7 +133,7 @@ public class Entity {
 		
 		}
 		glPopMatrix();
-		*/
+		
 		
 	}
 	

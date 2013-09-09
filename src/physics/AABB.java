@@ -12,7 +12,6 @@ public class AABB {
 
 	
 	/* Minimum x, y, and z values represent the AABBs location */
-	//public Vector3f pos, size;
 	private float minX;
 	private float maxX;
 	private float minY;

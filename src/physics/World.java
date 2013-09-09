@@ -60,18 +60,6 @@ public class World {
 			}
 			glEnd();
 			
-			//2D test
-			/*
-			glColor3f(.5f, .8f, 1f);
-			glTranslatef(-5f, -5f, -10);
-			glBegin(GL_QUADS);
-			{
-				glVertex2f(0f, 0f);
-				glVertex2f(0f, 5f);
-				glVertex2f(5f, 5f);
-				glVertex2f(5f, 0f);
-			}
-			glEnd();*/
 		}
 		glPopMatrix();
 		
@@ -80,8 +68,6 @@ public class World {
 		{
 			e.render();
 		}
-		
-		
 		
 	}
 	
@@ -99,11 +85,7 @@ public class World {
 	
 	public void update()
 	{
-		/*
-		if(entities.get(0).collides(entities.get(1)))
-		{
-			System.out.println("Collides!!!");
-		}*/
+		
 	}
 	
 	

@@ -35,9 +35,10 @@ public class Entity {
 		color3 = Color.RED;
 	}
 	
+	
 	public Entity(float x, float y, float z, float l, float w, float h, Color c)
 	{
-		Vector3f p = new Vector3f(x, y, y);
+		Vector3f p = new Vector3f(x, y, z);
 		Vector3f s = new Vector3f(w, h, l);
 		bounds = new AABB(p, s);
 		color = color2 = color3 = c;
@@ -45,7 +46,7 @@ public class Entity {
 	
 	public Entity(float x, float y, float z, float l, float w, float h, Color c1, Color c2, Color c3)
 	{
-		Vector3f p = new Vector3f(x, y, y);
+		Vector3f p = new Vector3f(x, y, z);
 		Vector3f s = new Vector3f(w, h, l);
 		bounds = new AABB(p, s);
 		color = c1;
@@ -59,15 +60,15 @@ public class Entity {
 		glPushMatrix();
 		{
 			//glColor3f(1.0f, 0.5f, 0f);
-			glTranslatef(bounds.getX(), bounds.getY(), bounds.getZ());
+			glTranslatef(bounds.getMinX(), bounds.getMinY(), bounds.getMinZ());
 			//glRotatef(x, 1, 1.5f, 0.75f);
 			glBegin(GL_QUADS);
 			{
 				
 				float width, height, length;
-				width = bounds.getWidth();
-				height = bounds.getHeight();
-				length = bounds.getLength();
+				width = Math.abs(bounds.getMaxX() - bounds.getMinX());
+				height = Math.abs(bounds.getMaxY() - bounds.getMinY());
+				length = Math.abs(bounds.getMaxZ() - bounds.getMinX());
 				
 				setColor(color3);
 				// Left face
@@ -117,6 +118,7 @@ public class Entity {
 		}
 		glPopMatrix();
 		
+		/*
 		glPushMatrix();
 		{
 			
@@ -131,6 +133,7 @@ public class Entity {
 		
 		}
 		glPopMatrix();
+		*/
 		
 	}
 	

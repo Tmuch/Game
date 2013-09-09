@@ -42,7 +42,7 @@ public class World {
 		//entities.add(new Entity());
 		
 		entities.add(new Entity(5,  5, 5,  5, 5, 5, Color.WHITE, Color.GREEN, Color.RED));
-		entities.add(new Entity(15, 5, 15, 5, 5, 5, Color.LIGHT_GRAY, Color.BLUE, Color.ORANGE));
+		entities.add(new Entity(15, 5, 5, 5, 5, 5, Color.LIGHT_GRAY, Color.BLUE, Color.ORANGE));
 	}
 	
 	public void render()
@@ -85,27 +85,25 @@ public class World {
 		
 	}
 	
+	
 	public void test()
 	{
-		float x = entities.get(0).bounds.getPos().getX();
-		float y = entities.get(0).bounds.getPos().getY();
-		float z = entities.get(0).bounds.getPos().getZ();
-		Vector3f p, s;
-		p = new Vector3f(x + 0.005f, y,z);
-		s = entities.get(0).bounds.getSize();
-		AABB nbb = new AABB(p, s);
-		if(!nbb.collides(entities.get(1).bounds))
+		
+		AABB copy = entities.get(0).bounds.copy();
+		copy.offset(0.05f, 0, 0);
+		if(!copy.collides(entities.get(1).bounds))
 		{
-			entities.get(0).bounds = nbb;
+			entities.get(0).bounds = copy;
 		}
 	}
 	
 	public void update()
 	{
+		/*
 		if(entities.get(0).collides(entities.get(1)))
 		{
 			System.out.println("Collides!!!");
-		}
+		}*/
 	}
 	
 	

@@ -8,105 +8,136 @@ package physics;
  * @author Tyler Much
  * 
  */
-public class AABB extends Bound {
+public class AABB {
 
-	public Vector3f pos, size;
-
-	/*
-	 * Size: x = width y = height z = length
-	 */
-
-	public AABB() {
-		pos = size = null;
+	
+	/* Minimum x, y, and z values represent the AABBs location */
+	//public Vector3f pos, size;
+	private float minX;
+	private float maxX;
+	private float minY;
+	private float maxY;
+	private float minZ;
+	private float maxZ;
+	
+	public AABB(Vector3f pos, Vector3f size)
+	{
+		minX = Math.min(pos.getX() + size.getX(), pos.getX());
+		maxX = Math.max(pos.getX() + size.getX(), pos.getX());
+		minY = Math.min(pos.getY() + size.getY(), pos.getY());
+		maxY = Math.max(pos.getY() + size.getY(), pos.getY());
+		minZ = Math.min(pos.getZ() + size.getZ(), pos.getZ());
+		maxZ = Math.max(pos.getZ() + size.getZ(), pos.getZ());
+		
 	}
-
-	public AABB(Vector3f p, Vector3f s) {
-		this.pos = p;
-		this.size = s;
+	
+	public AABB(float minX, float maxX, float minY, float maxY, float minZ, float maxZ)
+	{
+		this.minX = minX;
+		this.maxX = maxX;
+		this.minY = minY;
+		this.maxY = maxY;
+		this.minZ = minZ;
+		this.maxZ = maxZ;
 	}
-
-	boolean printed = true;
-
-	public boolean collides(Bound b) {
-		if (b instanceof AABB) {
-			AABB bound = (AABB)b;
-			Vector3f halfSizeA = this.size.div(2f);
-			Vector3f centerA = this.pos.add(halfSizeA);
-			Vector3f halfSizeB = bound.size.div(2f);
-			Vector3f centerB = bound.pos.add(halfSizeB);
-
-			/*
-			 * If difference between centerpoints of two AABB's is smaller than
-			 * the sum of the distances between each AABB's centerpoint and edge
-			 * of its respective box.
-			 */
-
-			if (!printed) {
-				System.out.println("a.pos: " + this.pos);
-				System.out.println("a.size: " + this.size);
-				System.out.println("b.pos: " + bound.pos);
-				System.out.println("b.size: " + bound.size);
-
-				System.out.println("halfSizeA: " + halfSizeA);
-				System.out.println("centerA: " + centerA);
-				System.out.println("halfSizeB: " + halfSizeB);
-				System.out.println("centerB: " + centerB);
-
-			}
-			printed = true;
-
-			if (Math.abs(centerA.getX() - centerB.getX()) < (halfSizeA.getX() + halfSizeB
-					.getX())) {
-				if (Math.abs(centerA.getY() - centerB.getY()) < (halfSizeA
-						.getY() + halfSizeB.getY())) {
-					if (Math.abs(centerA.getZ() - centerB.getZ()) < (halfSizeA
-							.getZ() + halfSizeB.getZ())) {
-						return true;
-					}
+	
+	
+	
+	public boolean collides(AABB b)
+	{
+		if(b.getMaxX() > this.minX && b.getMinX() < this.maxX)
+		{
+			if(b.getMaxY() > this.minY && b.getMinY() < this.maxY)
+			{
+				if(b.getMaxZ() > this.minZ && b.getMinZ() < this.maxZ)
+				{
+					return true;
 				}
 			}
 		}
+		
 		return false;
 	}
+	
+	
+	public AABB offset(float x, float y, float z)
+	{
+		this.minX += x;
+		this.maxX += x;
+		this.minY += y;
+		this.maxY += y;
+		this.minZ += z;
+		this.maxZ += z;
+		return this;
+	}
+	
+	public AABB copy()
+	{
+		return new AABB(this.minX, this.maxX, this.minY, this.maxY, this.minZ, this.maxZ);
+	}
+	
 
-	public Vector3f getPos() {
-		return pos;
+	public float getMinX() {
+		return minX;
 	}
 
-	public void setPos(Vector3f pos) {
-		this.pos = pos;
+	public void setMinX(float minX) {
+		this.minX = minX;
 	}
 
-	public Vector3f getSize() {
-		return size;
+	public float getMaxX() {
+		return maxX;
 	}
 
-	public void setSize(Vector3f size) {
-		this.size = size;
+	public void setMaxX(float maxX) {
+		this.maxX = maxX;
 	}
 
-	public float getX() {
-		return pos.getX();
+	public float getMinY() {
+		return minY;
 	}
 
-	public float getY() {
-		return pos.getY();
+	public void setMinY(float minY) {
+		this.minY = minY;
 	}
 
-	public float getZ() {
-		return pos.getZ();
+	public float getMaxY() {
+		return maxY;
 	}
 
-	public float getHeight() {
-		return size.getY();
+	public void setMaxY(float maxY) {
+		this.maxY = maxY;
 	}
 
-	public float getWidth() {
-		return size.getX();
+	public float getMinZ() {
+		return minZ;
 	}
 
-	public float getLength() {
-		return size.getZ();
+	public void setMinZ(float minZ) {
+		this.minZ = minZ;
 	}
 
+	public float getMaxZ() {
+		return maxZ;
+	}
+
+	public void setMaxZ(float maxZ) {
+		this.maxZ = maxZ;
+	}
+	
+	public float getX()
+	{
+		return minX;
+	}
+	
+	public float getY()
+	{
+		return minY;
+	}
+	
+	public float getZ()
+	{
+		return minZ;
+	}
+	
 }

@@ -8,6 +8,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
+import entities.EntityPlayer;
 import static org.lwjgl.opengl.GL11.*;
 import physics.Camera;
 import physics.Vector3f;
@@ -230,7 +231,8 @@ public class Game {
 		
 		if(input.getKey(Keyboard.KEY_RETURN))
 		{
-			world.test();
+			//world.test();
+			new EntityPlayer();
 		}
 		
 		

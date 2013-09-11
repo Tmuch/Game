@@ -83,9 +83,9 @@ public class Game {
 			
 			/* Must be here (for now) because OpenGL context must be initialized */
 			//cam = new Camera(70, (float) Display.getWidth() / (float) Display.getHeight(), 0.3f, 1000);
-			player = new EntityPlayer();
 			RenderUtils.initGraphics();
 			world = new World();
+			player = new EntityPlayer(world);
 		} catch (LWJGLException e) {
 			e.printStackTrace();
 		}
@@ -169,14 +169,10 @@ public class Game {
 		
 		if(!inMenu)
 			player.input(input);
-		
-		
-		
 	}
 	
 	private void update()
 	{
 		world.update();
 	}
-
 }

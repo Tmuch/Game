@@ -20,7 +20,6 @@ public class Camera
 	private float	nearclip;
 	private float	farclip;
 	
-	private float	height;
 	
 	private boolean cheat;
 	
@@ -30,15 +29,17 @@ public class Camera
 	
 	public static final float DIR_FB = 1f;
 	public static final float DIR_LR = 0f;
+	public static final float DIR_UD = -1f;
+	
+	public static final float ROTATE_X = 0;
+	public static final float ROTATE_Y = 1;
 	
 	public static final float POS = 1f;
 	public static final float NEG = -1f;
 
 	public Camera(float fov, float aspect, float near, float far)
 	{
-		this.height = 2;
-		x = z = 0;
-		y = -height * 3;
+		x = z = y = 0;
 		rotx = roty = rotz = 0;
 		this.fov = fov;
 		this.aspect = aspect;

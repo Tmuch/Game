@@ -15,7 +15,7 @@ public class World {
 	private int length;
 	private int height;
 	
-	private ArrayList<Block> blocks;
+	public ArrayList<Block> blocks;
 	
 	public World()
 	{

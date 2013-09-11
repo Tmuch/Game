@@ -59,7 +59,7 @@ public class AABB {
 	}
 	
 	
-	public AABB offset(float x, float y, float z)
+	public void offset(float x, float y, float z)
 	{
 		this.minX += x;
 		this.maxX += x;
@@ -67,7 +67,7 @@ public class AABB {
 		this.maxY += y;
 		this.minZ += z;
 		this.maxZ += z;
-		return this;
+		
 	}
 	
 	public AABB copy()
@@ -137,6 +137,11 @@ public class AABB {
 	public float getZ()
 	{
 		return minZ;
+	}
+	
+	public String toString()
+	{
+		return "-----\nMinX: " + minX + "\nmaxX: " + maxX + "\nminY: " + minY + "\nmaxY: " + maxY + "\nminZ: " + minZ + "\nmaxZ: " + minZ + "\n-----";
 	}
 	
 }

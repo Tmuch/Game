@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import org.lwjgl.opengl.Display;
 
 import utils.RenderUtils;
-import entities.Entity;
+import blocks.*;
 
 public class World {
 	
@@ -15,14 +15,14 @@ public class World {
 	private int length;
 	private int height;
 	
-	private ArrayList<Entity> entities;
+	private ArrayList<Block> blocks;
 	
 	public World()
 	{
 		width = 40;
 		length = 40;
 		height = 100;
-		entities = new ArrayList<Entity>();
+		blocks = new ArrayList<Block>();
 		init();
 	}
 	
@@ -31,7 +31,7 @@ public class World {
 		this.width = w;
 		this.length = l;
 		this.height = h;
-		entities = new ArrayList<Entity>();
+		blocks = new ArrayList<Block>();
 		init();
 	}
 	
@@ -41,8 +41,8 @@ public class World {
 		//entities.add(new Entity(20, 20, -10, 20, 15, 50, Color.LIGHT_GRAY));
 		//entities.add(new Entity());
 		
-		entities.add(new Entity(5,  5, 5,  5, 5, 5, Color.WHITE, Color.GREEN, Color.RED));
-		entities.add(new Entity(15, 5, 5, 5, 5, 5, Color.LIGHT_GRAY, Color.BLUE, Color.ORANGE));
+		blocks.add(new Block(5,  5, 5,  5, 5, 5, Color.WHITE, Color.GREEN, Color.RED));
+		blocks.add(new Block(15, 5, 5, 5, 5, 5, Color.LIGHT_GRAY, Color.BLUE, Color.ORANGE));
 	}
 	
 	public void render()
@@ -64,7 +64,7 @@ public class World {
 		glPopMatrix();
 		
 		
-		for(Entity e : entities)
+		for(Block e : blocks)
 		{
 			e.render();
 		}
@@ -74,12 +74,11 @@ public class World {
 	
 	public void test()
 	{
-		
-		AABB copy = entities.get(0).bounds.copy();
-		copy.offset(0.05f, 0, 0);
-		if(!copy.collides(entities.get(1).bounds))
+		AABB copy = blocks.get(0).bounds.copy();
+		copy.offset(0.025f, 0, 0);
+		if(!copy.collides(blocks.get(1).bounds))
 		{
-			entities.get(0).bounds = copy;
+			blocks.get(0).bounds = copy;
 		}
 	}
 	

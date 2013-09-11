@@ -1,4 +1,4 @@
-package entities;
+package blocks;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.*;
@@ -8,7 +8,7 @@ import physics.Color;
 import physics.Vector3f;
 import utils.RenderUtils;
 
-public class Entity {
+public class Block {
 	
 	/*
 	 * Position of the entity.
@@ -25,7 +25,7 @@ public class Entity {
 	
 	private Color color, color2, color3;
 	
-	public Entity()
+	public Block()
 	{
 		Vector3f p = new Vector3f(0f, 1f, -10f);
 		Vector3f s = new Vector3f(2f, 2f, 5f);
@@ -36,7 +36,7 @@ public class Entity {
 	}
 	
 	
-	public Entity(float x, float y, float z, float l, float w, float h, Color c)
+	public Block(float x, float y, float z, float l, float w, float h, Color c)
 	{
 		Vector3f p = new Vector3f(x, y, z);
 		Vector3f s = new Vector3f(w, h, l);
@@ -44,7 +44,7 @@ public class Entity {
 		color = color2 = color3 = c;
 	}
 	
-	public Entity(float x, float y, float z, float l, float w, float h, Color c1, Color c2, Color c3)
+	public Block(float x, float y, float z, float l, float w, float h, Color c1, Color c2, Color c3)
 	{
 		Vector3f p = new Vector3f(x, y, z);
 		Vector3f s = new Vector3f(w, h, l);
@@ -60,7 +60,7 @@ public class Entity {
 		glPushMatrix();
 		{
 			//glColor3f(1.0f, 0.5f, 0f);
-			glTranslatef(bounds.getMinX(), bounds.getMinY(), bounds.getMinZ());
+			glTranslatef(bounds.getX(), bounds.getY(), bounds.getZ());
 			//glRotatef(x, 1, 1.5f, 0.75f);
 			glBegin(GL_QUADS);
 			{
@@ -68,7 +68,7 @@ public class Entity {
 				float width, height, length;
 				width = Math.abs(bounds.getMaxX() - bounds.getMinX());
 				height = Math.abs(bounds.getMaxY() - bounds.getMinY());
-				length = Math.abs(bounds.getMaxZ() - bounds.getMinX());
+				length = Math.abs(bounds.getMaxZ() - bounds.getMinZ());
 				
 				setColor(color3);
 				// Left face
@@ -138,7 +138,7 @@ public class Entity {
 	}
 	
 	
-	public boolean collides(Entity e)
+	public boolean collides(Block e)
 	{
 		return this.bounds.collides(e.bounds);
 	}

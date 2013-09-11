@@ -203,7 +203,7 @@ public class EntityPlayer extends Entity {
 	
 	public boolean collides(AABB box)
 	{
-		
+		return this.bounds.collides(box);
 	}
 
 }

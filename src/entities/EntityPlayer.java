@@ -39,11 +39,17 @@ public class EntityPlayer extends Entity {
 			generalMoveSpeed = 1.2f;
 			
 			lookSpeed = 0.04f;
-			
-			camHeight = height * 0.75f;
 			world = w;
 			width = 5;
 			height = 9;
+			
+			camHeight = height * 0.75f;
+			
+			posX = posZ = posY = 0f;
+			rotX = rotY = rotZ = 0f;
+			
+			updateView();
+			updateCam();
 			
 			created = true;
 		}
@@ -79,6 +85,13 @@ public class EntityPlayer extends Entity {
 		ArrayList<Block> blocks = world.blocks;
 		for(Block b : blocks)
 		{
+			
+			/*
+			 * If it collides, then move parallel to the surface it is colliding with
+			 * based on the parallel component of the movement vector.
+			 */
+			
+			
 			if(collides(b.bounds))
 			{
 				posX = tX;
@@ -106,7 +119,7 @@ public class EntityPlayer extends Entity {
 	{
 		cam.setX(-posX);
 		cam.setZ(-posZ);
-		cam.setY(posY + camHeight);
+		cam.setY(posY - camHeight);
 		
 		cam.setRotx(rotX);
 		cam.setRoty(rotY);
@@ -188,10 +201,6 @@ public class EntityPlayer extends Entity {
 	}
 	
 	
-	/*
-	 * TODO: Collision detection.
-	 */
-	
 	public boolean collides(AABB box)
 	{
 		/* 
@@ -207,18 +216,10 @@ public class EntityPlayer extends Entity {
 		/* Line segment from (minX, minZ) to (maxX, minZ) */
 		float radius = width/2;
 		
-		
-		/*System.out.println("-------------");
-		System.out.println("posX: " + posX);
-		System.out.println("box.getMinX(): " + box.getMinX());
-		System.out.println("box.getMaxX(): " + box.getMaxX());*/
-		
 		if(posX >= box.getMinX() && posX <= box.getMaxX())
 		{
-			System.out.println("here");
 			if(Math.abs(box.getMinZ() - posZ) <= radius)
 			{
-				System.out.println("\there");
 				return true;
 			}
 		} else

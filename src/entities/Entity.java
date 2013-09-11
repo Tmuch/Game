@@ -24,7 +24,9 @@ public abstract class Entity {
 	protected AABB bounds;
 	
 	
-	
+	protected static enum Collision {
+		X_minZ, X_maxZ, Z_minX, Z_maxX, NONE
+	}
 	
 	
 	

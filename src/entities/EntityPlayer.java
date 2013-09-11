@@ -3,6 +3,7 @@ package entities;
 import input.InputManager;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
 
 import physics.Camera;
 
@@ -25,14 +26,21 @@ public class EntityPlayer extends Entity {
 	{
 		if(!created)
 		{
+			cam = new Camera(70, (float)Display.getWidth() / (float)Display.getHeight(), 0.3f, 1000);
+			
+			fbSpeed = 0.15f;
+			lrSpeed = 0.1f;
+			generalMoveSpeed = 1.2f;
+			
+			lookSpeed = 0.04f;
+			
 			created = true;
 		}
 	}
 	
-	
-	public void move(float pos_neg, float dir)
+	public void updateView()
 	{
-		
+		cam.useView();
 	}
 	
 	

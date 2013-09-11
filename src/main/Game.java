@@ -38,19 +38,16 @@ public class Game {
 	private long elapsed;
 	
 	private World world;
-	public Camera cam;
-	//private GamePhysics physics;
+	//private Camera cam;
+	
+	private EntityPlayer player;
+	
 	private InputManager input;
 	private boolean running;
 	private boolean paused;
 	
 	
-	private float fbSpeed;
-	private float lrSpeed;
-	private float generalMoveSpeed;
-	private float lookSpeed;
-	
-	
+	private boolean inMenu;
 
 	public static void main(String[] args) {
 		Game game = new Game();
@@ -68,11 +65,7 @@ public class Game {
 		prevTimeMillis = System.currentTimeMillis();
 		elapsed = 1;
 		
-		fbSpeed = 0.15f;
-		lrSpeed = 0.1f;
-		generalMoveSpeed = 1.2f;
-		
-		lookSpeed = 0.04f;
+		inMenu = false;
 	}
 	
 	private void start()
@@ -87,10 +80,10 @@ public class Game {
 			Display.setTitle("Game");
 			
 			input = InputManager.getManager();
-			//input.grabMouse();
 			
 			/* Must be here (for now) because OpenGL context must be initialized */
-			cam = new Camera(70, (float) Display.getWidth() / (float) Display.getHeight(), 0.3f, 1000);
+			//cam = new Camera(70, (float) Display.getWidth() / (float) Display.getHeight(), 0.3f, 1000);
+			player = new EntityPlayer();
 			RenderUtils.initGraphics();
 			world = new World();
 		} catch (LWJGLException e) {
@@ -132,9 +125,6 @@ public class Game {
 				elapsed += currTime - prevTimeMillis;
 				prevTimeMillis = currTime;
 				ups = (updates * SECOND_MS) / elapsed;
-				//fps = (frames * SECOND_MS) / elapsed;
-				//System.out.println(ups);
-				//System.out.println(fps);
 				
 				if(elapsed > Long.MAX_VALUE / 2)
 				{
@@ -166,7 +156,7 @@ public class Game {
 		
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();
-		cam.useView();
+		player.updateView();
 		world.render();
 		Display.update();
 	}
@@ -175,65 +165,10 @@ public class Game {
 	private void input()
 	{
 		input.update();
-		if(input.getKey(Keyboard.KEY_S))
-		{
-			cam.move(-fbSpeed * generalMoveSpeed, Camera.DIR_FB);
-		}
-		if(input.getKey(Keyboard.KEY_W))
-		{
-			cam.move(fbSpeed * generalMoveSpeed, Camera.DIR_FB);
-		}
 		
-		if(input.getKey(Keyboard.KEY_A))
-		{
-			cam.move(lrSpeed * generalMoveSpeed, Camera.DIR_LR);
-		}
 		
-		if(input.getKey(Keyboard.KEY_D))
-		{
-			cam.move(-lrSpeed * generalMoveSpeed, Camera.DIR_LR);
-		}
-		
-		if(input.getKey(Keyboard.KEY_LSHIFT))
-		{
-			cam.moveDown(0.12f);
-		}
-		
-		if(input.getKey(Keyboard.KEY_RSHIFT))
-		{
-			cam.toggleCheat();
-		}
-		
-		if(input.getKey(Keyboard.KEY_SPACE))
-		{
-			if(cam.getCheat())
-			{
-				cam.jump();
-			} else
-				cam.moveUp(0.12f);
-		}
-		
-		if(input.getKey(Keyboard.KEY_ESCAPE))
-		{
-			input.grabMouse();
-		}
-		
-		if(input.getKey(Keyboard.KEY_TAB))
-		{
-			input.unGrabMouse();
-		}
-		
-		if(input.mouseXYChange())
-		{
-			cam.rotateY(input.getDX() * lookSpeed);
-			cam.rotateX(input.getDY() * lookSpeed * -1f);
-		}
-		
-		if(input.getKey(Keyboard.KEY_RETURN))
-		{
-			//world.test();
-			new EntityPlayer();
-		}
+		if(!inMenu)
+			player.input(input);
 		
 		
 		
@@ -242,17 +177,6 @@ public class Game {
 	private void update()
 	{
 		world.update();
-	}
-	
-	
-	public void setLRSpeed(float speed) 
-	{
-		lrSpeed = speed;
-	}
-	
-	public void setFBSpeed(float speed)
-	{
-		fbSpeed = speed;
 	}
 
 }

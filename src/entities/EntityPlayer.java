@@ -203,39 +203,7 @@ public class EntityPlayer extends Entity {
 	
 	public boolean collides(AABB box)
 	{
-		/* 
-		 * Skipping vertical collision for now. Focusing on 2D.
-		 * 
-		 */
 		
-		/*
-		 * (posX, posZ) = center of circle
-		 * width = diameter of circle
-		 */
-		
-		/* Line segment from (minX, minZ) to (maxX, minZ) */
-		float radius = width/2;
-		
-		if(posX >= box.getMinX() && posX <= box.getMaxX())
-		{
-			if(Math.abs(box.getMinZ() - posZ) <= radius)
-			{
-				return true;
-			}
-		} else
-		{
-			float a, b, c;
-			a = box.getMinX() - posX;
-			b = box.getMinZ() - posZ;
-			c = box.getMaxX() - posX;
-			
-			if(((a*a + b*b) <= radius*radius) || ((c*c + b*b) <= radius*radius))
-			{
-				return true;
-			}
-		}
-		
-		return false;
 	}
 
 }
